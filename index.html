@@ -5,14 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Groeipad — Websites, AI-automatisering & digitale groei</title>
   <meta name="description" content="Groeipad bouwt moderne websites en slimme AI-automatisering voor ondernemers die professioneler willen groeien met minder handwerk." />
-  <meta name="theme-color" content="#f8fafc" />
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light dark" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><text x='16' y='22' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'>S</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="img/pathweaver.svg" type="image/svg+xml" fetchpriority="high" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
+  <!-- Toetsenbord en voorleessoftware: eerst de inhoud, dan pas het menu. -->
+  <a class="skip-link" href="#inhoud">Naar de inhoud</a>
 
   <!-- NAVIGATIE -->
   <header class="nav" id="top">
@@ -29,23 +34,23 @@
         <a href="#faq">FAQ</a>
       </nav>
       <div class="nav-cta">
-        <a href="#contact" class="btn btn-primary btn-sm">Gratis gesprek</a>
+        <a href="#contact" class="btn btn-primary btn-sm">Neem contact op</a>
       </div>
-      <button class="nav-toggle" aria-label="Menu openen" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="mobiel-menu">
         <span></span><span></span>
       </button>
     </div>
-    <div class="mobile-menu" hidden>
+    <div class="mobile-menu" id="mobiel-menu" hidden>
       <a href="#werk">Werk</a>
       <a href="#diensten">Diensten</a>
       <a href="#werkwijze">Werkwijze</a>
       <a href="#pakketten">Pakketten</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact" class="btn btn-primary">Gratis gesprek</a>
+      <a href="#contact" class="btn btn-primary">Plan een gratis gesprek</a>
     </div>
   </header>
 
-  <main>
+  <main id="inhoud" tabindex="-1">
     <!-- HERO -->
     <section class="hero">
       <div class="hero-grid-bg" aria-hidden="true"></div>
@@ -71,7 +76,7 @@
 
         <div class="hero-card reveal">
           <div class="portrait">
-            <img src="img/pathweaver.svg" alt="Illustratie: vijf wensen worden samengeweven tot een pad, door drie controles naar een eindpunt" width="886" height="1107" />
+            <img src="img/pathweaver.svg" alt="Illustratie: vijf wensen worden samengeweven tot een pad, door drie controles naar een eindpunt" width="886" height="1107" fetchpriority="high" decoding="async" />
             <div class="portrait-caption">
               <strong>Groeipad</strong>
               <span>Webdesign & AI-automatisering</span>
@@ -349,6 +354,7 @@
             <summary>Moet ik zelf technische kennis hebben?</summary>
             <p>Helemaal niet. Ik leg alles in begrijpelijke taal uit en regel de techniek. Jij houdt het overzicht.</p>
           </details>
+          <p class="faq-meer">Staat je vraag er niet bij? <a href="#contact">Stel hem via het formulier</a>, je krijgt binnen 24 uur antwoord.</p>
         </div>
       </div>
     </section>
@@ -360,12 +366,15 @@
           <h2>Klaar om je bedrijf professioneler én slimmer te laten werken?</h2>
           <p>Plan een gratis kennismaking van 30 minuten. We kijken naar je website, je processen en de grootste digitale kansen.</p>
         </div>
-        <form class="contact-form" onsubmit="return handleSubmit(event)">
-          <label>Naam<input type="text" name="naam" required placeholder="Je naam" /></label>
-          <label>E-mail<input type="email" name="email" required placeholder="jij@bedrijf.nl" /></label>
+        <!-- novalidate: de uitleg bij een fout komt van de pagina zelf, in gewone taal (script.js), in plaats van de ballon van de browser. -->
+        <form class="contact-form" novalidate onsubmit="return handleSubmit(event)">
+          <label>Naam<input type="text" name="naam" required autocomplete="name" placeholder="Je naam" /></label>
+          <label>E-mail<input type="email" name="email" required autocomplete="email" placeholder="jij@bedrijf.nl" /></label>
           <label>Waar kan ik je mee helpen?<textarea name="bericht" rows="3" placeholder="Vertel kort over je bedrijf en wens"></textarea></label>
+          <label class="honingpot" aria-hidden="true">Laat dit veld leeg<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          <p class="form-fout" role="alert" hidden></p>
           <button type="submit" class="btn btn-white btn-block">Plan je gratis kennismaking →</button>
-          <p class="form-note" hidden>Bedankt! Je e-mailprogramma wordt geopend om het bericht te versturen.</p>
+          <p class="form-note" hidden>Bedankt! Je e-mailprogramma opent met je bericht. Gebeurt dat niet, gebruik dan het e-mailadres onderaan de pagina.</p>
         </form>
       </div>
     </section>
@@ -379,7 +388,7 @@
           <span class="brand-mark">G</span>
           <span class="brand-name">Groeipad</span>
         </a>
-        <p>Websites, AI-automatisering & digitale groei voor ondernemers.</p>
+        <p>Websites, slimme automatisering en digitale groei voor ondernemers.</p>
       </div>
       <div class="footer-links">
         <div>
@@ -392,17 +401,17 @@
         <div>
           <strong>Contact</strong>
           <a href="mailto:info@pathconsultancy.nl">info@pathconsultancy.nl</a>
-          <a href="https://wa.me/31600000000">WhatsApp</a>
-          <a href="https://www.linkedin.com/">LinkedIn</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </div>
     <div class="container footer-bottom">
       <span>© <span id="year"></span> Groeipad. Alle rechten voorbehouden.</span>
-      <span>KvK 00000000</span>
+      <span>Reactie binnen 1 werkdag</span>
+      <span>Getest met de Weaver</span>
     </div>
   </footer>
 
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
